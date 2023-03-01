@@ -4,7 +4,7 @@
   "description": "gk mvp project",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack --watch",
+    "react-dev": "webpack --watch --mode development",
     "start": "nodemon server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --config=webpack.config.js"
@@ -26,8 +26,15 @@
     "crypto-js": "^4.1.1",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
+    "html-webpack-plugin": "^5.5.0",
     "mongoose": "^7.0.0",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.9.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.8.2"
+  },
+  "browser": {
+    "child_process": false
   }
 }

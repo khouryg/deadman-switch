@@ -1,10 +1,11 @@
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require("path");
 const SRC_DIR = path.join(__dirname, "/client/src");
 const DIST_DIR = path.join(__dirname, "/client/dist");
 
+
 module.exports = {
   mode: "development",
-  devtool: "inline-source-map",
   entry: `${SRC_DIR}/index.jsx`,
   output: {
     filename: "bundle.js",
@@ -13,33 +14,28 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use:{
-          loader: "babel-loader",
+        use: {
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
+            presets: ['@babel/preset-env', '@babel/preset-react']
           }
         }
       },
       {
-        test: /\.css$/,
-        use: [
-          { loader: "style-loader" },
-          { loader: "css-loader" },
-        ]
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
       },
       {
-        test: /\.svg$/,
-        use: ["@svgr/webpack"]
+        test: /\.(png|jp(e*)g|svg|gif)$/,
+        use: ['file-loader'], //or url-loader?
       },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/i,
-        type: "asset/resource"
-      }
     ]
   },
-  resolve: {
-    extensions: [".js", ".jsx"]
-  }
-};
+  // plugins: [
+  //   new HTMLWebpackPlugin({
+  //     template: path.join(__dirname, 'client/dist', 'index.html'),
+  //   }),
+  // ]
+}

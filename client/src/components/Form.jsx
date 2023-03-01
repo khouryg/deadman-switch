@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import Modal from './Modal';
+import Modal from './Modal.jsx';
 var CryptoJS = require("crypto-js");
 
 
