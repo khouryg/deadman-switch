@@ -1,3 +1,8 @@
 textarea {
   resize: vertical;
 }
+
+#switch-review {
+  text-align: left;
+  margin: 4%
+}

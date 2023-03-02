@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
-import Header from './Header.jsx'
-import Form from './Form.jsx';
-// const axios = require('axios');
+import { useParams } from 'react-router-dom';
 
-function App() {
+function Message() {
+  const { id } = useParams();
 
   return (
-  <div class="container-fluid">
-    <Header />
-  </div>);
+    <div class="container">
+      <div>Decrypt message id: <strong>{id}</strong></div>
+      <label>Enter Passphrase:</label>
+      <input type="text" ></input>
+      <button>Decrypt</button>
+    </div>
+  );
 }
 
-export default App;
+export default Message;

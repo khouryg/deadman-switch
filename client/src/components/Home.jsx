@@ -1,11 +1,9 @@
 import React, {useState} from 'react';
 import Modal from './Modal.jsx';
-var CryptoJS = require("crypto-js");
 
-
-function Form({formData, setFormData}) {
+function Form() {
   const [confirmModal, setConfirmModal] = useState(false);
-
+  const [formData, setFormData] = useState({timer: "1"});
   function handleFormChange(e) {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
@@ -13,19 +11,10 @@ function Form({formData, setFormData}) {
     e.preventDefault();
     setConfirmModal(!confirmModal);
   }
-  function encryptMessage(e) {
-    const plaintext = e.target.value;
-    const passphrase = formData.passphrase;
-    const salt = CryptoJS.lib.WordArray.random(128/8);  // Generate a random salt value
-    const key = CryptoJS.PBKDF2(passphrase, salt, { keySize: 256/32, iterations: 10000 });
-    const encrypted = CryptoJS.AES.encrypt(plaintext, key, { keySize: 256/32 });
-    setFormData({...formData, encrypted_message: encrypted, "salt": salt})
-  }
   return (
   <div class='container'>
     <form>
       <h4>Create a deadman switch</h4>
-
       <label>Switch length</label>
       <span>Minutes: {formData.timer}</span>
       <input type="range" name="timer" min="0" max="10" step="1" value={formData.timer} class="range-input" onChange={handleFormChange}/>
@@ -36,8 +25,8 @@ function Form({formData, setFormData}) {
       <label>Passphrase:</label>
       <input type="password" name="passphrase" onChange={handleFormChange}></input>
       <label>Message:</label>
-      <textarea type="text" name="plaintext" onChange={handleFormChange}></textarea>
-      <button onClick={handleSubmit}>{confirmModal && <Modal />}Submit</button>
+      <textarea id="plaintext-message" type="text" name="message" onChange={handleFormChange}></textarea>
+      <button onClick={handleSubmit}>{confirmModal && <Modal formData={formData} setFormData={setFormData}/>}Submit</button>
     </form>
   </div>
   );
