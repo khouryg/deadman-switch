@@ -19,14 +19,16 @@ function Form() {
       <span>Minutes: {formData.timer}</span>
       <input type="range" name="timer" min="0" max="10" step="1" value={formData.timer} class="range-input" onChange={handleFormChange}/>
       <label>Recepient's Email</label>
-      <input type="email" name="recipient-email" placeholder="e.g. satoshi@gmail.com"  onChange={handleFormChange}></input>
+      <input type="email" name="recipient_email" placeholder="e.g. satoshi@gmail.com"  onChange={handleFormChange}></input>
       <label>Email for switch reminder</label>
-      <input type="text" name="reminder-email" placeholder="optional" onChange={handleFormChange}></input>
+      <input type="text" name="reminder_email" placeholder="optional" onChange={handleFormChange}></input>
       <label>Passphrase:</label>
       <input type="password" name="passphrase" onChange={handleFormChange}></input>
       <label>Message:</label>
       <textarea id="plaintext-message" type="text" name="message" onChange={handleFormChange}></textarea>
-      <button onClick={handleSubmit}>{confirmModal && <Modal formData={formData} setFormData={setFormData}/>}Submit</button>
+      {/* need to add validation here to prevent error from empty submition */}
+      <button onClick={handleSubmit}>Submit</button>
+      {confirmModal && <Modal formData={formData} setFormData={setFormData} confirmModal={confirmModal} setConfirmModal={setConfirmModal}/>}
     </form>
   </div>
   );
