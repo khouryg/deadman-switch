@@ -8,11 +8,13 @@ function Message() {
   const [reveal, setReveal] = useState(false);
   const [decryptedMessage, setDecryptedMessage] = useState('');
   let encrypted;
+  // const [encrypt, setEncrypt] = useState('');
   const { id } = useParams();
   useEffect(() => {
     axios.get(`/getmessage/${id}`)
       .then((response) => {
         encrypted = response.data;
+        // setEncrypt(response.data);
         console.log(encrypted);
       })
       .catch(err => console.log(err))
@@ -37,13 +39,14 @@ function Message() {
         <label>Enter Passphrase:</label>
         <input id="decrypt-message" type="password"  ></input>
         <button onClick={handleDecrypt}>Decrypt</button>
+        {/* <label>Encrypted message:</label>
+        <p>{!reveal && encrypt?.message}</p> */}
       </div>
       <div hidden={!reveal}>
         <div>Decrypt message id: <strong>{id}</strong></div>
         <label>Message:</label>
         <p>{decryptedMessage}</p>
       </div>
-
     </div>
   );
 }

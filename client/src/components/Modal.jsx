@@ -18,8 +18,9 @@ function Modal({setFormData, formData, confirmModal, setConfirmModal}) {
   useEffect(() => {
     if(encryptedData.salt) {
       let id;
-      console.log("form data", encryptedData);
-      axios.post('/addmessage', encryptedData)
+      const trigger = (parseInt(encryptedData.timer) * 1000) + Date.now();
+      const data = {...encryptedData, trigger: trigger}
+      axios.post('/addmessage', data)
         .then(response => {id = response.data})
         .then(() => {window.location.href = `/summary/${id}`})
         .catch(err => console.log(err))
@@ -34,10 +35,14 @@ function Modal({setFormData, formData, confirmModal, setConfirmModal}) {
       <article>
         <h3>You are about to broadcast a switch with the following information:</h3>
         <div id="switch-review">
+        {/* // this needs to be changed to be dynamic */}
+          <p><strong>Duration:</strong> {formData.timer} seconds</p>
           <p><strong>Recipient:</strong> {formData.recipient_email}</p>
           <p><strong>Reminder Email:</strong> {formData.reminder_email}</p>
           <p><strong>Passphrase:</strong> {formData.passphrase}</p>
           <p><strong>Message:</strong> {formData.message}</p>
+          <p><strong>Salt:</strong> {encryptedData.salt}</p>
+          <p><strong>Encrypted Message:</strong> {encryptedData.message}</p>
         </div>
         <footer>
           <a href="#cancel" role="button" class="secondary" onClick={() => {setConfirmModal(false)}}>Cancel</a>

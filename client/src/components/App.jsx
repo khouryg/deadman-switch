@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from './Header.jsx';
-import Home from './Home.jsx';
+import Create from './Create.jsx';
 import Message from './Message.jsx';
 import Access from './Access.jsx';
 import Summary from './Summary.jsx';
@@ -11,7 +11,7 @@ function App() {
     <Router>
       <Header />
       <Routes>
-        <Route exact path="/" element={<Home/>} />
+        <Route exact path="/" element={<Create/>} />
         <Route path="/message/:id?" element={<Message/>}/>
         <Route path="/access/:id?" element={<Access/>}/>
         <Route path="/summary/:id" element={<Summary/>}/>

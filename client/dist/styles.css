@@ -1,5 +1,6 @@
-textarea {
+#plaintext-message {
   resize: vertical;
+	height: 400px;
 }
 
 #switch-review {
@@ -9,7 +10,20 @@ textarea {
 
 .zomg-spacer {
   width: 63px;
-  height: 2px;
-  border: solid 1px #0e7edc;
+  height: 1px;
+  border: solid 2px hsl(195deg, 85%, 41%);
   margin-bottom: 1.5rem;
+}
+
+#icon {
+	display: inline-block;
+	height: 24px;
+	width: 24px;
+	margin-right: 8px;
+	background-image: url('sun.svg');
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+[data-theme="dark"] #icon {
+	background-image: url('moon.svg');
 }

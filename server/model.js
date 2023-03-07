@@ -9,14 +9,15 @@ const defSchema = new mongoose.Schema({
   reminder_email: String,
   salt: {type: String, required: true},
   message: {type: String, required: true},
-  delivered: {type: Boolean, default: false}
+  delivered: {type: Boolean, default: false},
+  trigger: {type: Number, required: true}
 })
 
 const Message = mongoose.model('Message', defSchema);
 
-cron.schedule('*/30 * * * * *', async () => {
+cron.schedule('*/5 * * * * *', async () => {
   const currentUnixTime = Date.now(); // get current Unix timestamp in seconds
-  await Message.find({ timer: { $lt: currentUnixTime }, delivered: false})
+  await Message.find({ trigger: { $lt: currentUnixTime }, delivered: false})
   .then(async (docs) => {
     for(const message of docs) {
       const mailOptions = {
@@ -34,8 +35,6 @@ cron.schedule('*/30 * * * * *', async () => {
             await Message.updateOne({ _id: message._id }, { delivered: true });
         }
       });
-      // update the message afeter it has been sent
-      // await Message.updateOne({ _id: message._id }, { delivered: true });
     }
   })
   .catch(err => {
@@ -53,6 +52,10 @@ const transporter = nodemailer.createTransport({
 
 module.exports = {
   addMessage(data) {
+    // const unixTime = (parseInt(data.timer) * 1000) + Date.now();
+    // console.log('unix time', unixTime)
+    // const request = {...data, "timer": unixTime}
+    // console.log("yo this is the data", request)
     return Message.insertMany(data)
       .then((response) => response)
       .catch((err) => console.log(err))
