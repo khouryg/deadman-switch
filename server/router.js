@@ -3,7 +3,6 @@ const path = require('path');
 const router = express.Router();
 const controller = require('./controller');
 
-
 router.post('/addmessage', controller.addMessage);
 router.get('/getmessage/:id', controller.getMessage);
 router.get('/*', function(req, res) {
