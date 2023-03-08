@@ -107,7 +107,7 @@ function Modal({setFormData, formData, confirmModal, setConfirmModal}) {
         <div id="switch-review">
         {/* // this needs to be changed to be dynamic */}
           <p><strong>Duration:</strong> {formData.timer} seconds</p>
-          <p><strong>Cost:</strong> {formData.price} seconds</p>
+          <p><strong>Cost: $</strong> {formData.price}</p>
           <p><strong>Recipient:</strong> {formData.recipient_email}</p>
           <p><strong>Reminder Email:</strong> {formData.reminder_email}</p>
           <p><strong>Passphrase:</strong> {formData.passphrase}</p>
